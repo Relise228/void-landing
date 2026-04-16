@@ -72,7 +72,8 @@ export default function PosterBackground() {
           <img
             key={i}
             src={`${IMG_BASE}${m.poster_path}`}
-            alt={m.title || m.name || ""}
+            alt={m.title || m.name ? `Poster for ${m.title || m.name}` : ""}
+            aria-hidden={!(m.title || m.name)}
             loading="eager"
             style={{ animationDelay: `-${delay}s` }}
           />

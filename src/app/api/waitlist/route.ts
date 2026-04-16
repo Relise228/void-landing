@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { email } = await req.json();
+    const { email, feature, hours } = await req.json();
 
     if (!email || !email.includes("@")) {
       return NextResponse.json(
@@ -35,14 +35,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Server Configuration Error" }, { status: 500 });
     }
 
-    // Append to sheet (Assumes the sheet is named "Sheet1" and columns are A:B)
+    // Append to sheet: A (Email), B (Feature), C (Hours/week), D (Date)
     const response = await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: "A:B", // Add to Columns A (Email) and B (Date)
+      range: "A:D",
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values: [
-          [email, new Date().toISOString()],
+          [email, feature || "", hours || "", new Date().toISOString()],
         ],
       },
     });

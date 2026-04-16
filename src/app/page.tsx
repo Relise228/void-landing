@@ -21,12 +21,12 @@ export default function Home() {
           <PosterBackground />
           <div className="hero-content container">
             <h1 className="hero-anim-1">
-              Your Personal <span className="ai-accent">AI&nbsp;Bunker</span>
+              Track your series, block spoilers,
               <br />
-              for the <span className="violet">Streaming Chaos.</span>
+              and <span className="violet">never forget the plot.</span>
             </h1>
             <p className="hero-sub hero-anim-2">
-              Stop hunting episodes and dodging spoilers. Void organizes your entire watch experience automatically.
+              One hub for movies, series, and anime. AI keeps your watchlist organized — you just pick what to watch.
             </p>
             <div className="hero-cta hero-anim-3">
               <a href="#waitlist" className="btn btn-primary">
@@ -51,11 +51,11 @@ export default function Home() {
             <div className="pain-grid">
               <div className="glass pain-card anim">
                 <span className="icon">&#128257;</span>
-                <h3>Your dub dropped. You had no idea.</h3>
+                <h3>New episode dropped. You had no idea.</h3>
                 <p>
-                  You check three Telegram channels, two websites, and a Reddit
-                  thread — only to find out the episode came out three days ago
-                  in your preferred dub. Every. Single. Time.
+                  You check three apps, two websites, and a Reddit thread —
+                  only to find out the episode came out three days ago.
+                  Every. Single. Time.
                 </p>
               </div>
               <div className="glass pain-card anim">
@@ -91,11 +91,11 @@ export default function Home() {
             </div>
             <div className="solution-blocks">
               <div className="solution-block anim">
-                <h3>Your dub is ready. Your phone already knows.</h3>
+                <h3>New episode is out. Your phone already knows.</h3>
                 <p>
-                  Void monitors release groups in real time. The moment your
-                  episode drops in your preferred dub — you get the
-                  notification. No hunting, no checking.
+                  Void monitors releases in real time. The moment a new
+                  episode drops — you get the notification. No hunting, no
+                  checking.
                 </p>
               </div>
               <div className="solution-block anim">
@@ -132,12 +132,12 @@ export default function Home() {
             <div className="features-grid">
               <div className="holo-border feature-card feature-card--large anim">
                 <span className="badge">CORE FEATURE</span>
-                <span className="icon">&#128225;</span>
-                <h3>Dubbing Tracker</h3>
+                <span className="icon">&#128203;</span>
+                <h3>Smart Watchlist</h3>
                 <p>
-                  Real-time monitoring of release groups via RSS, Telegram, and
-                  custom scrapers. Personalized push alerts: &ldquo;Your episode
-                  in [Studio Name] dub is live.&rdquo;
+                  Create, organize, and track your personal watchlist. Sort by
+                  status, genre, or mood — Void keeps everything in one place so
+                  you always know what to watch next.
                 </p>
               </div>
               <div className="holo-border feature-card anim">
@@ -212,7 +212,7 @@ export default function Home() {
                     tracker
                   </li>
                   <li>
-                    <span className="check">&#10003;</span> Basic dubbing
+                    <span className="check">&#10003;</span> Release
                     notifications
                   </li>
                   <li>
@@ -237,13 +237,23 @@ export default function Home() {
                 </a>
               </div>
               <div className="holo-border pricing-card pricing-card--highlighted anim">
-                <span className="badge">MOST POWERFUL</span>
+                <span className="badge">MOST POPULAR</span>
                 <h3>AI-Powered</h3>
                 <div className="price">
-                  <span className="blurred-price">$12.99</span>
+                  <span className="price-old">$4.99</span>{" "}
+                  $2.99{" "}
+                  <span
+                    style={{
+                      fontSize: ".9rem",
+                      fontWeight: 400,
+                      color: "var(--text-muted)",
+                    }}
+                  >
+                    / month
+                  </span>
                 </div>
                 <span className="price-note">
-                  Early access pricing locked for waitlist members
+                  $2.99/mo for your first 3 months — waitlist exclusive
                 </span>
                 <ul>
                   <li>
@@ -297,10 +307,7 @@ export default function Home() {
               Get early access, lock your price, and help shape what the
               platform becomes.
             </p>
-            <p className="urgency">
-              Early access slots are limited. Currently: 2,400+ on the waitlist.
-            </p>
-            <EmailForm
+<EmailForm
               buttonText="Claim My Spot"
               style={{ maxWidth: 400, margin: "0 auto" }}
             />
@@ -311,6 +318,23 @@ export default function Home() {
         </section>
 
         <FAQ />
+
+        {/* FOUNDER */}
+        <section className="founder" id="founder">
+          <div className="container anim">
+            <div className="glass founder-card">
+              <p className="section-label">Built by one dev</p>
+              <h2 className="founder-title">
+                Hey, I&apos;m <span>Andrii.</span>
+              </h2>
+              <p className="founder-bio">
+                React developer with 5 years of experience. I&apos;m building
+                Void because I&apos;m tired of missing episodes and dodging
+                spoilers. If you feel the same — you&apos;re in the right place.
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* FOOTER */}
         <footer className="site-footer">

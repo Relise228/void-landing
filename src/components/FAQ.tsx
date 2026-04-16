@@ -8,8 +8,8 @@ const items = [
     a: "We're targeting Q3 2026. Waitlist members will be notified first and receive early access.",
   },
   {
-    q: "Which dubbing studios and languages will be supported?",
-    a: "Launch focuses on English, Russian, and Ukrainian dubs. More studios added based on community demand.",
+    q: "What content does Void support?",
+    a: "Void supports movies, TV shows, and anime. We track releases across major platforms and update your watchlist automatically.",
   },
   {
     q: "How does the Anti-Spoiler Shield work?",
