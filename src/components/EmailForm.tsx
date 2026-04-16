@@ -129,8 +129,8 @@ export default function EmailForm({
       track("Waitlist_Joined", { feature, hours });
 
       setSubmitted(true);
-    } catch (err: any) {
-      setError(err.message || "Something went wrong.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
       setLoading(false);
     }

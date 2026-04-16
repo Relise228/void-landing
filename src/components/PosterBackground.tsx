@@ -38,47 +38,57 @@ const FALLBACK: PosterItem[] = [
   { poster_path: "/5NyLm42TmCqCMOZFvH4fcoSNKEW.jpg", title: "The Witcher" },
 ];
 
+interface PostersWithDelays {
+  items: PosterItem[];
+  delays: string[];
+}
+
+function withDelays(items: PosterItem[]): PostersWithDelays {
+  return {
+    items,
+    delays: items.map((_, i) => (i * 0.7 + Math.random() * 2).toFixed(1)),
+  };
+}
+
 export default function PosterBackground() {
-  const [posters, setPosters] = useState<PosterItem[]>([]);
+  const [state, setState] = useState<PostersWithDelays>({ items: [], delays: [] });
 
   useEffect(() => {
     const key = process.env.NEXT_PUBLIC_TMDB_API_KEY;
-    if (!key) {
-      setPosters(FALLBACK);
-      return;
-    }
-
-    Promise.all([
-      fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${key}&page=1`).then((r) => r.json()),
-      fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${key}&page=1`).then((r) => r.json()),
-    ])
-      .then(([movies, tv]) => {
+    const loadFallback = () => Promise.resolve({ items: FALLBACK });
+    const loadRemote = () =>
+      Promise.all([
+        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${key}&page=1`).then((r) => r.json()),
+        fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${key}&page=1`).then((r) => r.json()),
+      ]).then(([movies, tv]) => {
         const all = [...(movies.results || []), ...(tv.results || [])]
           .filter((m: PosterItem) => m.poster_path)
           .slice(0, POSTER_COUNT);
-        setPosters(all.length > 0 ? all : FALLBACK);
-      })
-      .catch(() => setPosters(FALLBACK));
+        return { items: all.length > 0 ? all : FALLBACK };
+      });
+
+    (key ? loadRemote() : loadFallback())
+      .then(({ items }) => setState(withDelays(items)))
+      .catch(() => setState(withDelays(FALLBACK)));
   }, []);
+
+  const { items: posters, delays } = state;
 
   if (posters.length === 0) return <div className="poster-bg" />;
 
   return (
     <div className="poster-bg">
-      {posters.map((m, i) => {
-        const delay = (i * 0.7 + Math.random() * 2).toFixed(1);
-        return (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            key={i}
-            src={`${IMG_BASE}${m.poster_path}`}
-            alt={m.title || m.name ? `Poster for ${m.title || m.name}` : ""}
-            aria-hidden={!(m.title || m.name)}
-            loading="eager"
-            style={{ animationDelay: `-${delay}s` }}
-          />
-        );
-      })}
+      {posters.map((m, i) => (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          key={i}
+          src={`${IMG_BASE}${m.poster_path}`}
+          alt={m.title || m.name ? `Poster for ${m.title || m.name}` : ""}
+          aria-hidden={!(m.title || m.name)}
+          loading="eager"
+          style={delays[i] ? { animationDelay: `-${delays[i]}s` } : undefined}
+        />
+      ))}
     </div>
   );
 }
