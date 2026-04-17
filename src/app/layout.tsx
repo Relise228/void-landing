@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Syne, DM_Sans, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const syne = Syne({
@@ -179,6 +180,19 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         {children}
         <Analytics />
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18098504955"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads-gtag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18098504955');
+          `}
+        </Script>
       </body>
     </html>
   );
